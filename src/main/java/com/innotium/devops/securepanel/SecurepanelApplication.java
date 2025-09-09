@@ -14,7 +14,7 @@ public class SecurepanelApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SecurepanelApplication.class, args);
-        System.out.print("Hello");
+
 	}
 
 }
