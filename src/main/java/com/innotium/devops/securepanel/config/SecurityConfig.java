@@ -3,6 +3,8 @@ package com.innotium.devops.securepanel.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -20,10 +22,10 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/ping").permitAll()
-                        .requestMatchers("/version").permitAll()
-                        //추후에 ADMIN만 접속 가능한 경로 권한 설정
+                        .requestMatchers("/auth/**", "/login", "/ping").permitAll()
+                        .requestMatchers("/js/**", "/css/**", "/images/**").permitAll() // ✅ 정적 리소스 허용
+
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
@@ -31,4 +33,9 @@ public class SecurityConfig {
 
         return http.build();
     }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 }
