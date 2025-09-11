@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const user = await response.json();
 
     document.getElementById("welcome").textContent = `안녕하세요, ${user.username}님 👋`;
-    document.getElementById("roleInfo").textContent = `권한: ${user.role}`;
+    //document.getElementById("roleInfo").textContent = `권한: ${user.role}`;
   } catch (err) {
     console.error("사용자 정보 요청 실패:", err);
     alert("로그인이 필요합니다.");
