@@ -36,7 +36,14 @@
                 <div class="status-card">운영체제: <span id="osName">--</span></div>
                 <div class="status-card">CPU 점유율: <span id="cpuUsage">--%</span></div>
                 <div class="status-card">RAM 사용량: <span id="ramUsage">--GB</span></div>
-                <div class="status-card">디스크 상태: <pre id="diskStatus">--</pre></div>
+            </div>
+
+            <!-- 디스크 상태 영역 -->
+            <div class="disk-section">
+                <h3>💽 디스크 상태</h3>
+                <div id="diskCharts" class="disk-charts">
+                    <!-- JS에서 드라이브별 canvas가 삽입됨 -->
+                </div>
             </div>
         </section>
     </main>

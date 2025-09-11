@@ -1,13 +1,18 @@
 package com.innotium.devops.securepanel.service;
 
+import com.innotium.devops.securepanel.dto.DiskInfo;
 import com.innotium.devops.securepanel.dto.SystemStatusDto;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
 import oshi.SystemInfo;
 import oshi.hardware.*;
 
+import java.io.File;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class StatusService {
@@ -24,11 +29,11 @@ public class StatusService {
             } else if (osName.contains("nux") || osName.contains("nix")) {
                 return getSystemStatus("Linux");
             } else {
-                return new SystemStatusDto("Unknown", "--", "--", "--");
+                return new SystemStatusDto("Unknown", "--", "--", List.of());
             }
         } catch (Exception e) {
             log.error("[StatusService] 시스템 상태 수집 중 오류 발생", e);
-            return new SystemStatusDto("오류", "--", "--", "--");
+            return new SystemStatusDto("오류", "--", "--", List.of());
         }
     }
 
@@ -55,26 +60,39 @@ public class StatusService {
             long totalMemory = memory.getTotal();
             String ram = formatBytes(usedMemory) + " / " + formatBytes(totalMemory);
 
-            // 디스크 정보
-            StringBuilder diskInfo = new StringBuilder();
+            // 디스크 정보 리스트 구성 (실제 사용량 기준)
+            List<DiskInfo> diskList = new ArrayList<>();
             for (HWDiskStore disk : disks) {
-                String name = disk.getName();
-                String read = formatBytes(disk.getReadBytes());
-                String write = formatBytes(disk.getWriteBytes());
+                List<HWPartition> partitions = disk.getPartitions();
+                for (HWPartition partition : partitions) {
+                    String mount = partition.getMountPoint(); // 예: "C:\\"
+                    String fsType = partition.getType();      // 예: "NTFS"
+                    String name = mount + " (" + fsType + ")";
 
-                diskInfo.append(name)
-                        .append(": 읽기 ")
-                        .append(read)
-                        .append(", 쓰기 ")
-                        .append(write)
-                        .append("\n");
+                    try {
+                        File drive = new File(mount);
+                        long total = drive.getTotalSpace();      // 전체 용량
+                        long free = drive.getFreeSpace();        // 사용 가능 공간
+                        long used = total - free;
+
+                        double usedGB = used / (1024.0 * 1024 * 1024);
+                        double totalGB = total / (1024.0 * 1024 * 1024);
+
+                        // 유효한 드라이브만 추가
+                        if (totalGB > 0) {
+                            diskList.add(new DiskInfo(name, usedGB, totalGB));
+                        }
+                    } catch (Exception e) {
+                        log.warn("[Disk] 드라이브 접근 실패: {}", mount);
+                    }
+                }
             }
 
-            return new SystemStatusDto(osLabel, String.format("%.1f%%", cpuLoad), ram, diskInfo.toString().trim());
+            return new SystemStatusDto(osLabel, String.format("%.1f%%", cpuLoad), ram, diskList);
 
         } catch (Exception e) {
             log.error("[getSystemStatus] 시스템 정보 수집 중 오류 발생", e);
-            return new SystemStatusDto(osLabel, "--", "--", "--");
+            return new SystemStatusDto(osLabel, "--", "--", List.of());
         }
     }
 
