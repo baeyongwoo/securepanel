@@ -1,68 +1,137 @@
-body {
-    font-family: 'Segoe UI', 'Noto Sans KR', sans-serif;
-    background-color: #f4f6f8;
-    color: #333;
-    margin: 0;
-    padding: 0;
+:root {
+  --primary-color: #0055a5;
+  --dark-bg: #f4f6f8;
+  --text-color: #2c3e50;
+  --accent-color: #003366;
+  --font-main: 'Segoe UI', 'Noto Sans KR', sans-serif;
+}
 
+body {
+  font-family: var(--font-main);
+  background-color: var(--dark-bg);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
 }
 
 header {
-    background-color: #003366;
-    color: white;
-    padding: 2rem;
-    text-align: center;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.4rem;
+  margin-bottom: 0.3rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  opacity: 0.85;
 }
 
 main {
-    padding: 3rem 2rem;
-    max-width: 800px;
-    margin: auto;
+  max-width: 960px;
+  margin: 3rem auto;
+  padding: 0 2rem;
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+main h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color);
 }
 
-h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+main p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
 }
 
-p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-}
-
+/* 리스트 스타일 */
 ul {
-    margin-top: 1rem;
-    padding-left: 1.2rem;
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
 }
 
 li {
-    margin-bottom: 0.5rem;
+  background-color: white;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
 }
 
+li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* CTA 버튼 */
 .login-btn {
-    margin-top: 2rem;
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: #0055a5;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.9rem 1.6rem;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
 
 .login-btn:hover {
-    background-color: #003f7f;
+  background-color: #003f7f;
 }
 
+/* 푸터 */
 footer {
-    margin-top: 4rem;
+  margin-top: 4rem;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+  border-top: 1px solid #ddd;
+}
+.fixed-login {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #0055a5;
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 1000;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.text-block {
+  flex: 1;
+}
+
+.button-block {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
     text-align: center;
-    font-size: 0.9rem;
-    color: #777;
+  }
+
+  .button-block {
+    margin-top: 1.5rem;
+  }
 }
