@@ -16,13 +16,15 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/ping", "/css/**", "/js/**", "/images/**", "/").permitAll()
+                        .requestMatchers("/auth/me").authenticated()
                         .requestMatchers("/version").hasRole("ADMIN")
                         .requestMatchers("/home").authenticated()
+                        .requestMatchers("/api/status").authenticated()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login") // 커스텀 로그인 페이지
-                        .defaultSuccessUrl("/home", true) // 로그인 성공 시 이동
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/home", true)
                         .permitAll()
                 )
                 .logout(logout -> logout

@@ -25,13 +25,18 @@
         </header>
 
         <section class="dashboard-area">
-          
+            <!-- 사용자 정보 영역 -->
+            <div class="user-info">
+                <div class="status-card"><span id="welcome">사용자 정보 로딩 중...</span></div>
+                <div class="status-card"><span id="roleInfo">권한 정보 로딩 중...</span></div>
+            </div>
 
             <!-- 시스템 모니터링 영역 -->
             <div class="system-status">
+                <div class="status-card">운영체제: <span id="osName">--</span></div>
                 <div class="status-card">CPU 점유율: <span id="cpuUsage">--%</span></div>
-                <div class="status-card">RAM 사용량: <span id="ramUsage">--MB</span></div>
-                <div class="status-card">디스크 상태: <span id="diskStatus">--</span></div>
+                <div class="status-card">RAM 사용량: <span id="ramUsage">--GB</span></div>
+                <div class="status-card">디스크 상태: <pre id="diskStatus">--</pre></div>
             </div>
         </section>
     </main>
