@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" th:href="@{/css/login.css}">
 <head>
+<link rel="stylesheet" th:href="@{/css/login.css}">
     <meta charset="UTF-8">
     <title>로그인</title>
     <script src="/js/login.js" defer></script>
 </head>
 <body>
-<h2>로그인</h2>
-<form id="loginForm">
-    <label for="username">아이디:</label>
-    <input type="text" id="username" name="username" required><br>
+<div class="login-container">
+    <div class="logo-area">
+        <img src="/images/innotium-log.png" alt="Innotium Logo" class="logo">
+        <h2 class="title">솔루션 상황점검</h2>
+        <p class="subtitle">Innotium Secure Panel</p>
+    </div>
+    <form id="loginForm">
+        <label for="username">아이디:</label>
+        <input type="text" id="username" name="username" required>
 
-    <label for="password">비밀번호:</label>
-    <input type="password" id="password" name="password" required><br>
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required>
 
-    <button type="submit">로그인</button>
-</form>
+        <button type="submit">로그인</button>
+    </form>
+</div>
 </body>
 </html>
