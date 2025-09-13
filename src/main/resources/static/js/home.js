@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function () {
+  // 사용자 정보 가져오기
   try {
     const response = await fetch("/auth/me", {
       credentials: "include"
@@ -9,7 +10,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     const user = await response.json();
-
     document.getElementById("welcome").textContent = `안녕하세요, ${user.username}님 👋`;
     //document.getElementById("roleInfo").textContent = `권한: ${user.role}`;
   } catch (err) {
@@ -17,24 +17,48 @@ document.addEventListener("DOMContentLoaded", async function () {
     alert("로그인이 필요합니다.");
     window.location.href = "/login";
   }
-});
 
-const logoutBtn = document.getElementById("logoutBtn");
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", async function () {
-    try {
-      await fetch("/logout", {
-        method: "POST",
-        credentials: "include"
-      });
-      alert("로그아웃 되었습니다.");
-      window.location.href = "/login";
-    } catch (err) {
-      console.error("로그아웃 실패:", err);
-      alert("로그아웃 중 오류가 발생했습니다.");
-    }
-  });
-}
+  // 로그아웃 버튼 이벤트
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async function () {
+      try {
+        await fetch("/logout", {
+          method: "POST",
+          credentials: "include"
+        });
+        alert("로그아웃 되었습니다.");
+        window.location.href = "/login";
+      } catch (err) {
+        console.error("로그아웃 실패:", err);
+        alert("로그아웃 중 오류가 발생했습니다.");
+      }
+    });
+  }
+
+  // 시스템 상태 초기 로딩
+  fetchSystemStatus();
+
+  // 새로고침 버튼 이벤트
+  const refreshBtn = document.getElementById("refreshBtn");
+  if (refreshBtn) {
+    refreshBtn.addEventListener("click", fetchSystemStatus);
+  }
+
+  // 자동 갱신 토글 이벤트
+  const autoRefreshToggle = document.getElementById("autoRefreshToggle");
+  let autoRefreshInterval = null;
+
+  if (autoRefreshToggle) {
+    autoRefreshToggle.addEventListener("change", function () {
+      if (this.checked) {
+        autoRefreshInterval = setInterval(fetchSystemStatus, 5000); // 5초마다 갱신
+      } else {
+        clearInterval(autoRefreshInterval);
+      }
+    });
+  }
+});
 
 // 시스템 상태 가져오기
 async function fetchSystemStatus() {
@@ -50,17 +74,14 @@ async function fetchSystemStatus() {
     document.getElementById('cpuUsage').textContent = data.cpu || '--%';
     document.getElementById('ramUsage').textContent = data.ram || '--GB';
 
-    // 디스크 정보 시각화
-    const diskArray = data.disk;
-    renderDiskCharts(diskArray);
-
+    renderDiskCharts(data.disk);
   } catch (error) {
     console.error('시스템 상태 가져오기 오류:', error);
     setErrorState();
   }
 }
 
-// 로딩 상태
+// 로딩 상태 표시
 function setLoadingState() {
   document.getElementById('osName').textContent = '로딩 중...';
   document.getElementById('cpuUsage').textContent = '로딩 중...';
@@ -70,7 +91,7 @@ function setLoadingState() {
   if (diskContainer) diskContainer.innerHTML = '<p>디스크 정보 로딩 중...</p>';
 }
 
-// 오류 상태
+// 오류 상태 표시
 function setErrorState() {
   document.getElementById('osName').textContent = '오류';
   document.getElementById('cpuUsage').textContent = '오류';
@@ -93,7 +114,6 @@ function renderDiskCharts(diskArray) {
     const wrapper = document.createElement("div");
     wrapper.className = "disk-chart";
 
-    // 위험 수준에 따라 색상 클래스 추가
     if (percent > 0.9) {
       wrapper.classList.add("danger");
     } else if (percent > 0.7) {
@@ -131,7 +151,3 @@ function renderDiskCharts(diskArray) {
     container.appendChild(wrapper);
   });
 }
-
-// 최초 실행 + 주기적 갱신 (5초로 변경)
-fetchSystemStatus();
-setInterval(fetchSystemStatus, 5000);

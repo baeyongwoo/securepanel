@@ -33,9 +33,23 @@
 
             <!-- 시스템 모니터링 영역 -->
             <div class="system-status">
-                <div class="status-card">운영체제: <span id="osName">--</span></div>
-                <div class="status-card">CPU 점유율: <span id="cpuUsage">--%</span></div>
-                <div class="status-card">RAM 사용량: <span id="ramUsage">--GB</span></div>
+                <!-- 시스템 정보 카드 -->
+                <div class="status-card">
+                    <div class="status-info">
+                        운영체제: <span id="osName">--</span><br>
+                        CPU 점유율: <span id="cpuUsage">--%</span><br>
+                        RAM 사용량: <span id="ramUsage">--GB</span>
+                    </div>
+
+                    <!-- 버튼과 토글을 카드 내부에 묶어서 배치 -->
+                    <div class="status-controls-group">
+                        <button id="refreshBtn">🔄 새로고침</button>
+                        <label class="toggle-label">
+                            <input type="checkbox" id="autoRefreshToggle">
+                            자동 갱신
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <!-- 디스크 상태 영역 -->

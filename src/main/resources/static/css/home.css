@@ -85,11 +85,52 @@ body {
   margin-bottom: 2rem;
 }
 
+/* 시스템 상태 헤더 및 컨트롤 */
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.status-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.status-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#refreshBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#refreshBtn:hover {
+  background-color: #003f7f;
+}
+
+#autoRefreshToggle {
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
 /* 시스템 상태 카드 */
 .system-status {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 .status-card {
@@ -100,10 +141,91 @@ body {
   font-size: 1rem;
 }
 
+/* 디스크 상태 */
+.disk-section h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.disk-charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.disk-chart {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  flex: 1 1 200px;
+}
+
 .disk-chart.danger {
   background-color: #f8d7da;
 }
 
 .disk-chart.warning {
   background-color: #fff3cd;
+}
+
+.status-controls-inline {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.status-controls-inline button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.status-controls-inline button:hover {
+  background-color: #003f7f;
+}
+
+.status-controls-group {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: #f9fbfc;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #dce3ea;
+}
+
+.status-controls-group button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.status-controls-group button:hover {
+  background-color: #003f7f;
+}
+
+.toggle-label {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#autoRefreshToggle {
+  accent-color: var(--primary-color);
+  cursor: pointer;
 }
