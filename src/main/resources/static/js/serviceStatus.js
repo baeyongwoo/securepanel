@@ -47,3 +47,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+// 로그아웃 버튼 이벤트
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", async function () {
+      try {
+        await fetch("/logout", {
+          method: "POST",
+          credentials: "include"
+        });
+        alert("로그아웃 되었습니다.");
+        window.location.href = "/login";
+      } catch (err) {
+        console.error("로그아웃 실패:", err);
+        alert("로그아웃 중 오류가 발생했습니다.");
+      }
+    });
+  }
