@@ -1,0 +1,305 @@
+body {
+    font-family: 'Noto Sans', sans-serif;
+    background-color: #f5f7fa;
+    margin: 0;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.service-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+}
+
+.service-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 0.5rem;
+}
+
+.status-indicator {
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
+}
+
+.status-indicator.green {
+    background-color: #e0f7e9;
+    color: #27ae60;
+}
+
+.status-indicator.red {
+    background-color: #fdecea;
+    color: #e74c3c;
+}
+
+.control-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.control-btn:hover {
+    background-color: #2980b9;
+}
+:root {
+  --primary-color: #0055a5;
+  --accent-color: #003366;
+  --bg-color: #f4f6f8;
+  --font-main: 'Segoe UI', 'Noto Sans KR', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  background-color: var(--bg-color);
+  color: #2c3e50;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* 사이드바 */
+.sidebar {
+  width: 220px;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+}
+
+.nav-links a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.nav-links a:hover {
+  opacity: 0.8;
+}
+
+/* 메인 콘텐츠 */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  position: relative;
+}
+
+/* 상단 로그아웃 버튼 */
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2rem;
+}
+
+#logoutBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#logoutBtn:hover {
+  background-color: #003f7f;
+}
+
+/* 대시보드 영역 */
+.dashboard-area h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-area p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* 시스템 상태 헤더 및 컨트롤 */
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.status-header h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.status-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+#refreshBtn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#refreshBtn:hover {
+  background-color: #003f7f;
+}
+
+#autoRefreshToggle {
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+/* 시스템 상태 카드 */
+.system-status {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.status-card {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  font-size: 1rem;
+}
+
+/* 디스크 상태 */
+.disk-section h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.disk-charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.disk-chart {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  flex: 1 1 200px;
+}
+
+.disk-chart.danger {
+  background-color: #f8d7da;
+}
+
+.disk-chart.warning {
+  background-color: #fff3cd;
+}
+
+.status-controls-inline {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.status-controls-inline button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.status-controls-inline button:hover {
+  background-color: #003f7f;
+}
+
+.status-controls-group {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background-color: #f9fbfc;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #dce3ea;
+}
+
+.status-controls-group button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.status-controls-group button:hover {
+  background-color: #003f7f;
+}
+
+.toggle-label {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+#autoRefreshToggle {
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}

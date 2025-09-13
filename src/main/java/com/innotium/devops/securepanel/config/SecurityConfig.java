@@ -18,7 +18,7 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/ping", "/css/**", "/js/**", "/images/**", "/").permitAll()
                         .requestMatchers("/auth/me").authenticated()
                         .requestMatchers("/version").hasRole("ADMIN")
-                        .requestMatchers("/home").authenticated()
+                        .requestMatchers("/home", "/serviceStatus").authenticated()
                         .requestMatchers("/api/status").authenticated()
                         .anyRequest().authenticated()
                 )

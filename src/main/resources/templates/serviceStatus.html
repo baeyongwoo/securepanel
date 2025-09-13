@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>서비스 상태 - SecurePanel</title>
+    <link rel="stylesheet" href="/css/serviceStatus.css">
+    <script src="/js/serviceStatus.js" defer></script>
+</head>
+<body>
+<div class="layout">
+    <!-- 사이드바 -->
+    <aside class="sidebar">
+        <h2 class="logo">🔧 SecurePanel</h2>
+        <nav class="nav-links">
+            <a href="/home">📊 대시보드</a>
+            <a href="/logs">📄 로그 조회</a>
+            <a href="/settings">⚙️ 설정</a>
+        </nav>
+    </aside>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="main-content">
+        <header class="topbar">
+            <button id="logoutBtn">로그아웃</button>
+        </header>
+
+        <section class="service-status-area">
+            <h2 class="section-title">👥 서비스 상태</h2>
+            <div id="serviceStatusContainer" class="service-grid">
+                <!-- JS에서 카드 삽입 -->
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>
